@@ -13,7 +13,7 @@ import numpy as np
 import pandas as pd
 import datetime
 import time
-"""
+
 dates = np.arange(1891 , 2019)
 
 final_tab = []
@@ -23,15 +23,11 @@ events = ['MA1', 'MA0', 'MA2', 'MA3', 'MA4', 'MA5', 'MA6', 'MA7', 'MA8', 'MA9', 
           'WA7', 'WA8', 'WA9', 'WB1', 'WB2', 'WB3', 'WC1', 'WC2', 'WE1', 'WE2', 'WE3',
           'WF1', 'WF2', 'WF3', 'WF4', 'WF5', 'WF6', 'WF7', 'WF8', 'WF9']
 
-print(len(events)* len(dates)) -- > 6784
 
-90 boucles -- > 4 min 13 == 253 sec
-"""
 records = []
 approx = []
 no_results = []
-events = ['MF9', 'WF1', 'WA1', 'WC2', 'MF5', 'MF6', 'MF7', 'MF8', 'MF9', 'WA1', 'WA2', 'WA3', 'WA4', 'WA5', 'WA6']
-dates = [1993, 1897, 1900, 1940, 1989, 2018]
+
 count = 0
 
 x = datetime.datetime.now()
@@ -40,7 +36,7 @@ for epreuve in events :
     for annee in dates : 
         ok = False
         count+=1
-        #time.sleep(2)
+
         print(epreuve)
         print(str(annee))
         URL = 'http://trackfield.brinkster.net/More.asp?Year={}&EventCode={}'.format(annee, epreuve)
@@ -50,6 +46,7 @@ for epreuve in events :
             sexe = "Man"
         while ok == False :   
             try :
+                time.sleep(2)
                 page = requests.get(URL)
                 ok = True
             except :
@@ -105,10 +102,24 @@ y = datetime.datetime.now()
 print(str(count))
 print(str(y-x))
 
+records_df.to_csv('records.csv')
 
 
+"""
+dates = np.arange(1891 , 2019)
 
 
+events = ['MA1', 'MA0', 'MA2', 'MA3', 'MA4', 'MA5', 'MA6', 'MA7', 'MA8', 'MA9', 'MB1',
+          'MB2', 'MB3', 'MC1', 'MC2', 'MC3', 'ME1', 'ME2', 'MF1', 'MF2', 'MF3', 'MF4',
+          'MF5', 'MF6', 'MF7', 'MF8', 'MF9', 'WA1', 'WA2', 'WA3', 'WA4', 'WA5', 'WA6',
+          'WA7', 'WA8', 'WA9', 'WB1', 'WB2', 'WB3', 'WC1', 'WC2', 'WE1', 'WE2', 'WE3',
+          'WF1', 'WF2', 'WF3', 'WF4', 'WF5', 'WF6', 'WF7', 'WF8', 'WF9']
 
+print(len(events)* len(dates)) -- > 6784
+
+90 boucles -- > 4 min 13 == 253 sec
+"""
+
+    
     
     
