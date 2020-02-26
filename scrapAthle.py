@@ -38,8 +38,9 @@ x = datetime.datetime.now()
 
 for epreuve in events :
     for annee in dates : 
+        ok = False
         count+=1
-        time.sleep(2)
+        #time.sleep(2)
         print(epreuve)
         print(str(annee))
         URL = 'http://trackfield.brinkster.net/More.asp?Year={}&EventCode={}'.format(annee, epreuve)
@@ -47,8 +48,12 @@ for epreuve in events :
             sexe = "Woman"
         else :
             sexe = "Man"
-        page = requests.get(URL)
-        
+        while ok == False :   
+            try :
+                page = requests.get(URL)
+                ok = True
+            except :
+                print('err')
         soup = BeautifulSoup(page.content, 'html.parser')
         tableau = soup.find('table')
         
